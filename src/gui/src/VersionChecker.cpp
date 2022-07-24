@@ -23,6 +23,7 @@
 #include <QNetworkReply>
 #include <QProcess>
 #include <QLocale>
+#include <QRegExp>
 
 #define VERSION_REGEX "(\\d+\\.\\d+\\.\\d+)"
 //#define VERSION_URL "http://www.TODO.com/"
@@ -67,11 +68,11 @@ int VersionChecker::compareVersions(const QString& left, const QString& right)
     if (left.compare(right) == 0)
         return 0; // versions are same.
 
-    QStringList leftSplit = left.split(QRegExp("\\."));
+    QStringList leftSplit = QRegExp("\\.").splitString(left);
     if (leftSplit.size() != 3)
         return 1; // assume right wins.
 
-    QStringList rightSplit = right.split(QRegExp("\\."));
+    QStringList rightSplit = QRegExp("\\.").splitString(right);
     if (rightSplit.size() != 3)
         return -1; // assume left wins.
 

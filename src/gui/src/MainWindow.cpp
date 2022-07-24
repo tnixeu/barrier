@@ -45,7 +45,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QDesktopServices>
-#include <QDesktopWidget>
+#include <QRegExp>
 
 #if defined(Q_OS_MAC)
 #include <ApplicationServices/ApplicationServices.h>
@@ -352,7 +352,7 @@ void MainWindow::logOutput()
     if (m_pBarrier)
     {
         QString text(m_pBarrier->readAllStandardOutput());
-        for (QString line : text.split(QRegExp("\r|\n|\r\n"))) {
+        for (QString line : QRegExp("\r|\n|\r\n").splitString(text)) {
             if (!line.isEmpty())
             {
                 appendLogRaw(line);
@@ -389,7 +389,7 @@ void MainWindow::appendLogError(const QString& text)
 
 void MainWindow::appendLogRaw(const QString& text)
 {
-    for (QString line : text.split(QRegExp("\r|\n|\r\n"))) {
+    for (QString line : QRegExp("\r|\n|\r\n").splitString(text)) {
         if (!line.isEmpty()) {
             m_pLogWindow->appendRaw(line);
             updateFromLogLine(line);

@@ -24,6 +24,8 @@
 #include <QProcess>
 #endif
 
+#include <QRegExp>
+
 #if defined(Q_OS_WIN)
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>

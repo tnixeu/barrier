@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.4)
 
-find_package (Qt5 REQUIRED COMPONENTS Core Widgets Network)
+find_package (Qt6 REQUIRED COMPONENTS Core Widgets Network Core5Compat)
 set (CMAKE_AUTOMOC ON)
 set (CMAKE_AUTORCC ON)
 set (CMAKE_AUTOUIC ON)
@@ -131,7 +131,7 @@ add_executable (barrier WIN32
 
 include_directories (./src)
 
-target_link_libraries(barrier net base io Qt5::Core Qt5::Widgets Qt5::Network ${OPENSSL_LIBS})
+target_link_libraries(barrier net base io Qt6::Core Qt6::Widgets Qt6::Network Qt6::Core5Compat ${OPENSSL_LIBS})
 target_compile_definitions (barrier PRIVATE -DBARRIER_VERSION_STAGE="${BARRIER_VERSION_STAGE}")
 target_compile_definitions (barrier PRIVATE -DBARRIER_REVISION="${BARRIER_REVISION}")
 
@@ -177,5 +177,5 @@ if (BARRIER_BUILD_TESTS)
     add_test(guiunittests guiunittests)
 
     target_include_directories(guiunittests PUBLIC ../../ext)
-    target_link_libraries(guiunittests gtest gmock Qt5::Core Qt5::Widgets Qt5::Network ${libs})
+    target_link_libraries(guiunittests gtest gmock Qt6::Core Qt6::Widgets Qt6::Network ${libs})
 endif()
